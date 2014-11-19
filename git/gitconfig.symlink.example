@@ -14,6 +14,8 @@
         wtf     = !$ZSH/bin/git-wtf
         rank-contributors = !$ZSH/bin/git-rank-contributors
         count   = !git shortlog -sn
+        hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+        lga = log --graph --oneline --all --decorate
 [color]
         diff = auto
         status = auto
