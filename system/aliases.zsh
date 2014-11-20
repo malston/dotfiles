@@ -1,6 +1,7 @@
 # grc overides for ls
 #   Made possible through contributions from generous benefactors like
 #   `brew install coreutils`
+# had to modify .ohmyzsh/lib/aliases.zsh so that gls aliases would not conflict
 if $(gls &>/dev/null)
 then
   alias ls="gls -F --color"
@@ -16,7 +17,7 @@ fi
 
 alias flushdns="dscacheutil -flushcache"
 alias grep="grep --color"
-alias -g biggu=/Volumes/Big Disk
+alias -g bigdk=/Volumes/Big Disk
 alias -g passport=/Volumes/My Passport
 
 # Basic directory operations
