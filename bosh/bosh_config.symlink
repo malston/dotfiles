@@ -1,0 +1,19 @@
+---
+target: https://172.16.71.183:25555
+target_name: Bosh Lite Director
+target_version: 1.2749.0 (00000000)
+target_uuid: 7e25414d-2dfe-4a71-a28a-d09fd6c853f2
+aliases:
+  target:
+    lite: https://192.168.50.4:25555
+    7e25414d-2dfe-4a71-a28a-d09fd6c853f2: https://172.16.71.183:25555
+auth:
+  https://192.168.50.4:25555:
+    username: admin
+    password: admin
+  https://172.16.71.183:25555:
+    username: admin
+    password: admin
+deployment:
+  https://192.168.50.4:25555: "/Users/alstom/Development/bosh-lite/manifests/cf-manifest.yml"
+  https://172.16.71.183:25555: "/Users/alstom/Development/bosh-lite/manifests/cf-manifest.yml"

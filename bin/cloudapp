@@ -1,62 +1,63 @@
 #!/usr/bin/env ruby
-#
-# cloudapp
-# Zach Holman / @holman
-#
-# Uploads a file from the command line to CloudApp, drops it into your 
-# clipboard (on a Mac, at least).
-#
-# Example:
-#
-#   cloudapp drunk-blake.png
-#
-# This requires Aaron Russell's cloudapp_api gem:
-#
-#   gem install cloudapp_api
-#
-# Requires you set your CloudApp credentials in ~/.cloudapp as a simple file of:
-#
-#   email
-#   password
 
-require 'rubygems'
+require "rubygems"
 
-['json', 'cloudapp_api'].each do |gem|
-  begin
-    require gem
-  rescue LoadError
-    puts "You need to install #{gem}: gem install #{gem}"
-    exit!(1)
-  end
+begin
+    require 'cloudapp_api'
+rescue LoadError
+    puts "You need to install cloudapp_api: gem install cloudapp_api"
+      exit!(1)
 end
 
 config_file = "#{ENV['HOME']}/.cloudapp"
 unless File.exist?(config_file)
-  puts "You need to type your email and password (one per line) into "+
-       "`~/.cloudapp`"
+   puts "You need to type your email and password (one per line) into "+
+   "`~/.cloudapp`"
   exit!(1)
 end
 
 email,password = File.read(config_file).split("\n")
 
-if ARGV[0].nil?
-   puts "You need to specify a file to upload."
-   exit!(1)
+def clipboard(t)
+  puts "Copied #{t} to clipboard..."
+  `echo '#{t}' | tr -d "\n" | pbcopy`
 end
 
-urls = []
-ARGV.each do |x|
-  CloudApp.authenticate(email,password)
-  puts "Attempting to upload #{x}"
-  url = CloudApp::Item.create(:upload, {:file => x}).url
-
-  # Say it for good measure.
-  puts "Uploaded #{x} to #{url}"
-
-  # Get the embed link.
-  url = "#{url}/#{ARGV[0].split('/').last}"
-  urls << url
+def get_url(id)
+  list = CloudApp::Item.all(:per_page => 10)
+  url = list[id.to_i].url
 end
 
-# Copy it to your (Mac's) clipboard.
-`echo '#{urls.join(',')}' | tr -d "\n" | pbcopy`
+CloudApp.authenticate(email,password)
+
+def is_file?(file)
+  if file.nil?
+    return false
+  else
+    return File.exists?(file)
+  end
+end
+
+if ARGV[0] == "hello"
+  puts "Hello..."
+elsif is_file?(ARGV[0])
+  puts "Uploading #{ARGV[0]}..."
+  begin
+    url = CloudApp::Item.create(:upload, {:file => ARGV[0]}).url
+  rescue
+    if !CloudApp::Account.find.subscribed
+      puts "ERROR: Something went wrong, maby you have uploaded to many files for today (max 10 files/day)."
+    else
+      puts "ERROR: Something went wrong."
+    end
+    exit 0
+  end
+  clipboard(url)
+elsif ARGV[0] =~ /^\d$/
+  clipboard(get_url(ARGV[0]))
+else
+  list = CloudApp::Item.all(:per_page => 10)
+  list.each_with_index do |item,i|
+    puts "#{i}: #{item.name}" + "\n" 
+  end
+end

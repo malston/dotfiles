@@ -1,0 +1,53 @@
+# system-wide environment settings for zsh(1)
+if [ -x /usr/libexec/path_helper ]; then
+	eval `/usr/libexec/path_helper -s`
+fi
+
+
+# Emacs shortcuts
+bindkey -e
+
+# shortcut to this dotfiles path is $DOTFILES
+export DOTFILES=$HOME/.dotfiles
+
+# your project folder that we can `c [tab]` to
+export PROJECTS=~/workspace
+
+# source every .zsh file in this rep
+for config_file ($DOTFILES/**/*.zsh) source $config_file
+
+# Load the theme
+# export ZSH_THEME="smg"
+# source "$DOTFILES/zsh/themes/$ZSH_THEME.zsh-theme"
+
+# use .localrc for SUPER SECRET CRAP that you don't
+# want in your public, versioned repo.
+if [[ -a ~/.localrc ]]
+then
+  source ~/.localrc
+fi
+
+if [[ -a ~/.nvm/nvm.sh ]]
+then
+  source ~/.nvm/nvm.sh ]]
+fi
+
+# initialize autocomplete here, otherwise functions won't be loaded
+autoload -U promptinit && promptinit
+autoload colors && colors
+autoload -U compinit && compinit
+
+prompt smgt
+
+# Shell Functions
+# qfind - used to quickly find files that contain a string in a directory
+qfind () {
+  find . -exec grep -l -s $1 {} \;
+  return 0
+}
+
+# Custom exports
+## Set EDITOR to /usr/bin/vim if Vim is installed
+if [ -f /usr/bin/vim ]; then
+  export EDITOR=/usr/bin/vim
+fi
