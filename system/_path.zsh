@@ -54,6 +54,7 @@ export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOROOT/bin:${GOPATH//://bin:}/bin
 export VAGRANT=/usr/local/opt/vagrant
 export XD_HOME=/usr/local/opt/springxd/libexec/xd
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export GRAILS_HOME=/usr/local/opt/grails/libexec
 export GRADLE_OPTS='-Xmx1024m -Xms256m -XX:MaxPermSize=512m'
 export TOMCAT8_HOME=/Users/alstom/tools/apache-tomcat-8.0.0-RC10
