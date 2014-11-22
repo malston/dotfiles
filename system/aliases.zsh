@@ -19,6 +19,8 @@ alias flushdns="dscacheutil -flushcache"
 alias grep="grep --color"
 alias -g bigdk=/Volumes/Big Disk
 alias -g passport=/Volumes/My Passport
+alias showhidden="defaults write com.apple.finder AppleShowAllFiles YES"
+alias hidehidden="defaults write com.apple.finder AppleShowAllFiles NO"
 
 # Basic directory operations
 alias ....='cd ../../..'
@@ -31,7 +33,7 @@ alias -- -='cd -'
 alias _='sudo'
 
 ## Mutt in english
-alias mutt="LANG=en_US mutt"
+#alias mutt="LANG=en_US mutt"
 
 
 ## Git Aliases
