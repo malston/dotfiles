@@ -27,8 +27,8 @@
   pager = less -FXRS -x2
   excludesfile = /Users/malston/.gitignore_global
   autocrlf = input
-hooksPath = /Users/malston/git-hooks-core
-editor = /usr/bin/vim
+  hooksPath = /Users/malston/git-hooks-core
+  editor = /usr/bin/vim
 [grep]
   line-number = true
 [help]
