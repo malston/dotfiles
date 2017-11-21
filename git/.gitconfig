@@ -1,74 +1,75 @@
 [alias]
-	st = status
-	di = diff
-	co = checkout
-	ci = commit
-	br = branch
-	sta = stash
-	w = whatchanged
-	llog = log --date=local
-	flog = log --pretty=fuller --decorate
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	lol = log --graph --decorate --oneline
-	lola = log --graph --decorate --oneline --all
-	lup = log @{u}... --left-right --graph
-	blog = log origin/master... --left-right
-	ds = diff --staged
-	fixup = commit --fixup
-	squash = commit --squash
-	unstage = reset HEAD
-	rum = rebase master@{u}
+  st = status
+  di = diff
+  co = checkout
+  ci = commit
+  br = branch
+  sta = stash
+  w = whatchanged
+  llog = log --date=local
+  flog = log --pretty=fuller --decorate
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lol = log --graph --decorate --oneline
+  lola = log --graph --decorate --oneline --all
+  lup = log @{u}... --left-right --graph
+  blog = log origin/master... --left-right
+  ds = diff --staged
+  fixup = commit --fixup
+  squash = commit --squash
+  unstage = reset HEAD
+  rum = rebase master@{u}
   serve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
   clr = clone --recursive
   cl = clone
-	rage = !"for branch in `git branch -r | awk '{print $1}'`; do echo `git log -1 $branch --pretty=format:"%at:%%$branch%%%cr%%%cn%n"`;done | column -t -s'%' | sort -nr | cut -d ':' -f 2"
+  rage = !"for branch in `git branch -r | awk '{print $1}'`; do echo `git log -1 $branch --pretty=format:"%at:%%$branch%%%cr%%%cn%n"`;done | column -t -s'%' | sort -nr | cut -d ':' -f 2"
   lage = !"for branch in `git branch | sed 's/^\\* /\\ \\ /'`; do echo `git log -1 --pretty=format:"%at:%%$branch%%%cr%%%cn%n" $branch`;done | column -t -s'%' | sort -nr | cut -d ':' -f 2"
 [core]
-	pager = less -FXRS -x2
-	excludesfile = /Users/malston/.gitignore_global
-	autocrlf = input
-	hooksPath = /Users/malston/git-hooks-core
+  pager = less -FXRS -x2
+  excludesfile = /Users/malston/.gitignore_global
+  autocrlf = input
+hooksPath = /Users/malston/git-hooks-core
+editor = /usr/bin/vim
 [grep]
   line-number = true
 [help]
   autocorrect = 1
 [apply]
-	whitespace = nowarn
+  whitespace = nowarn
 [color]
-	branch = auto
-	diff = auto
-	interactive = auto
-	status = auto
-	ui = auto
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+  ui = auto
 [color "status"]
   added = yellow
   changed = green
   untracked = cyan
 [branch]
-	autosetupmerge = true
-	autosetuprebase = remote
+  autosetupmerge = true
+  autosetuprebase = remote
 [clean]
   require-force = false
 [push]
-	default = simple
+  default = simple
 [rerere]
   enabled = true
 [rebase]
-	autosquash = true
-	stat = true
+  autosquash = true
+  stat = true
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
 [format]
   pretty = format:"%h %C(yellow)%cr%Creset %Cgreen%an%Creset | %s"
 [user]
-	email = malston@pivotal.io
-	name = Mark Alston
-	initials = ma
+  email = malston@pivotal.io
+  name = Mark Alston
+  initials = ma
 [advice]
   pushNonFastForward = false
   statusHints = false
