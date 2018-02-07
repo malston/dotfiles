@@ -5,19 +5,28 @@
   ci = commit
   br = branch
   sta = stash
+  llog = "log --date=local"
+  flog = "log --pretty=fuller --decorate"
+  lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+  lol = "log --graph --decorate --oneline"
+  lola = "log --graph --decorate --oneline --all"
+  blog =" log origin/master... --left-right"
+  ds = "diff --staged"
+  fixup = "commit --fixup"
+  squash = "commit --squash"
+  unstage = "reset HEAD --"
+  rum = "rebase master@{u}"
+  dci = duet-commit
+  drv = duet-revert
+  dmg = duet-merge
+  drb = rebase -i --exec 'git duet-commit --amend --reset-author'
+  last = log -1 --format=full HEAD
+  pr = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+  pr-clean = "!git for-each-ref refs/heads/pr/* --format=\"%(refname)\" | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+  # aliases not in c0-workspace
+  lup = "log @{u}... --left-right --graph"
+  ci = commit
   w = whatchanged
-  llog = log --date=local
-  flog = log --pretty=fuller --decorate
-  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  lol = log --graph --decorate --oneline
-  lola = log --graph --decorate --oneline --all
-  lup = log @{u}... --left-right --graph
-  blog = log origin/master... --left-right
-  ds = diff --staged
-  fixup = commit --fixup
-  squash = commit --squash
-  unstage = reset HEAD
-  rum = rebase master@{u}
   serve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
   clr = clone --recursive
   cl = clone
@@ -28,7 +37,8 @@
   excludesfile = /Users/malston/.gitignore_global
   autocrlf = input
   hooksPath = /Users/malston/git-hooks-core
-  editor = /usr/bin/vim
+  editor = nvim
+  # editor = /usr/bin/vim
 [grep]
   line-number = true
 [help]
